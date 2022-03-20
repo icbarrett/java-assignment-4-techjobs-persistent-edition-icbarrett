@@ -21,9 +21,10 @@ public class SkillController {
     @Autowired
     private SkillRepository skillRepository;
 
-    @PostMapping
-    public String index(){
-        /*list of all skills in the database.*/
+    @GetMapping
+    public String index(Model model){
+        /* section 2.2 - list of all skills in the database.*/
+        model.addAttribute("employers", skillRepository.findAll());
         return "skills";
     }
 
