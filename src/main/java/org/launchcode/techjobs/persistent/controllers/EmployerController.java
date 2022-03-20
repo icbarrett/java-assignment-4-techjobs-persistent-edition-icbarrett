@@ -1,6 +1,9 @@
 package org.launchcode.techjobs.persistent.controllers;
 
 import org.launchcode.techjobs.persistent.models.Employer;
+import org.launchcode.techjobs.persistent.models.Job;
+import org.launchcode.techjobs.persistent.models.data.EmployerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -13,6 +16,24 @@ import java.util.Optional;
 @RequestMapping("employers")
 public class EmployerController {
 
+    @Autowired
+    private EmployerRepository employerRepository;
+
+    @RequestMapping("")
+    public String index(Job job, Model model){
+        /*list of all employers in the database.*/
+        model.addAttribute("employers", this.employerRepository.findAll());
+//        model.addAttribute("employers", this.employerRepository.findAll());
+        return "index";
+    }
+
+//    @RequestMapping("")
+//    public String index(Model model) {
+//
+//        model.addAttribute("title", "My Jobs");
+//
+//        return "index";
+//    }
 
     @GetMapping("add")
     public String displayAddEmployerForm(Model model) {
@@ -27,7 +48,7 @@ public class EmployerController {
         if (errors.hasErrors()) {
             return "employers/add";
         }
-
+        employerRepository.save(newEmployer);
         return "redirect:";
     }
 
@@ -35,6 +56,7 @@ public class EmployerController {
     public String displayViewEmployer(Model model, @PathVariable int employerId) {
 
         Optional optEmployer = null;
+
         if (optEmployer.isPresent()) {
             Employer employer = (Employer) optEmployer.get();
             model.addAttribute("employer", employer);
@@ -43,4 +65,6 @@ public class EmployerController {
             return "redirect:../";
         }
     }
+
+
 }

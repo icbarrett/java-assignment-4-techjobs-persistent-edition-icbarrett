@@ -19,6 +19,9 @@ public abstract class AbstractEntity {
     @Size(min=1, max=60)
     private String name;
 
+//    Don't we need an empty constructor?
+//    public AbstractEntity() {}
+
     public int getId() {
         return id;
     }

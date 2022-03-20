@@ -6,20 +6,22 @@ import javax.validation.constraints.Max;
 @Entity
 public class Skill extends AbstractEntity {
 
-    @Max(255)
+    @Max(100)
     private String skill;
 
-    public Skill(String skill) {
-        this.skill = skill;
+    public Skill(String description) {
+        this.skill = description;
     }
 
-    public Skill() { }
+    public Skill() {
 
-    public String getSkill() {
+    }
+
+    public String getDescription() {
         return skill;
     }
 
-    public void setSkill(String skill) {
-        this.skill = skill;
+    public void setDescription(String description) {
+        this.skill = description;
     }
 }
