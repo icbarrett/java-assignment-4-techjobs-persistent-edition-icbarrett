@@ -4,30 +4,27 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Skill extends AbstractEntity {
 
-    @Id
-    @GeneratedValue
-    private int id;
+//    @Id
+//    @GeneratedValue
+//    private int id;
 
-    @Max(100)
-    private String skill;
-
-    public Skill(String description) {
-        this.skill = description;
-    }
+    @Size(min =1, max = 100)
+    private String description;
 
     public Skill() {
-
     }
 
     public String getDescription() {
-        return skill;
+        return description;
     }
 
     public void setDescription(String description) {
-        this.skill = description;
+        this.description = description;
     }
 }
+
