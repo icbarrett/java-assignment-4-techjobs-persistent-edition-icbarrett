@@ -16,7 +16,7 @@ public abstract class AbstractEntity {
     private int id;
 
     @NotBlank
-    @Size(min=1, max=60)
+    @Size(min=1, max=70)
     private String name;
 
 //    Don't we need an empty constructor?
