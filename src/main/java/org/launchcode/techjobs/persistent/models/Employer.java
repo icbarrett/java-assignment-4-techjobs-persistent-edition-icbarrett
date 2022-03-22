@@ -15,6 +15,7 @@ public class Employer extends AbstractEntity {
         return jobs;
     }
 
+//Section 3: Add a jobs Field to Employer - #1,#2
     @OneToMany/*(mappedBy = "jobs")*/
     @JoinColumn(name = "employer_id")
     private final List<Job> jobs = new ArrayList<Job>();
