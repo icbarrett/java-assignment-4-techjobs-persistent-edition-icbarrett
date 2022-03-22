@@ -29,8 +29,8 @@ public class HomeController {
     @Autowired
     private JobRepository jobRepository;
     //Section 4: Updating HomeController, Again (paragraph #1)
-//    @Autowired
-//    private SkillRepository skillRepository;
+    @Autowired
+    private SkillRepository skillRepository;
 
     @RequestMapping("")
     public String index(Model model) {
@@ -47,19 +47,20 @@ public class HomeController {
         model.addAttribute(new Job());
         // Section 3: Updating HomeController - #2
         model.addAttribute("employers", employerRepository.findAll());
-//        model.addAttribute("skills", skillRepository.findAll());
+        model.addAttribute("skills", skillRepository.findAll());
         return "add";
     }
 
     @PostMapping("add")
     public String processAddJobForm(@ModelAttribute @Valid Job newJob,
                                     Errors errors, Model model,
-                                    @RequestParam int employerId/*,
-                                    @RequestParam List<Integer> skills*/) {
+                                    @RequestParam int employerId,
+                                    @RequestParam(required = false) List<Integer> skills) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Job");
-            //add error repositories
+            model.addAttribute("skills", skillRepository.findAll());
+            model.addAttribute("employers", employerRepository.findAll());
             return "add";
         }
         //section 3: Updating HomeController #4
@@ -68,17 +69,9 @@ public class HomeController {
             Employer employer = (Employer) optEmployer.get();
             newJob.setEmployer(employer);
 
-//        }
-
-        /*  In processAddJobForm, add code inside of this method to select
-            the employer object that has been chosen to be affiliated with
-            the new job. You will need to select the employer using the
-            request parameter you’ve added to the method.
-         */
-
             //Section 4: Updating HomeController: paragraph 3?
-//            List<Skill> skillObjs = (List<Skill>) skillRepository.findAllById(skills);
-//            newJob.setSkills(skillObjs);
+            List<Skill> skillObjs = (List<Skill>) skillRepository.findAllById(skills);
+            newJob.setSkills(skillObjs);
             jobRepository.save(newJob);
 
         }

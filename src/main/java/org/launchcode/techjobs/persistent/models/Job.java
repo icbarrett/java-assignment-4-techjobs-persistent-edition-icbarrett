@@ -16,14 +16,14 @@ public class Job extends AbstractEntity{
 
     // section 4: refactor Job.skill
     @ManyToMany
-    private final List<Skill> skills = new ArrayList<>();
+    private List<Skill> skills = new ArrayList<>();
 
     public Job() { }
 
-    public Job(Employer anEmployer, String someSkills) {
+    public Job(Employer anEmployer, List<Skill> someSkills) {
         super();
         this.employer = anEmployer;
-//        this.skills = someSkills;
+        this.skills = someSkills;
     }
 
     // Getters and setters.
@@ -48,6 +48,10 @@ public class Job extends AbstractEntity{
 
     public List<Skill> getSkills() {
         return skills;
+    }
+
+    public void setSkills(List<Skill> skills) {
+        this.skills = skills;
     }
 
     public void addSkill(Skill skill) {

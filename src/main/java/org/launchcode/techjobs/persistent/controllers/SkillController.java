@@ -13,7 +13,6 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("skills")
-
 public class SkillController {
 
     @Autowired
@@ -22,6 +21,7 @@ public class SkillController {
     @GetMapping()
     public String index(Model model){
         /* section 2.2 - list of all skills in the database.*/
+
         model.addAttribute("skills", skillRepository.findAll());
         return "skills/index";
     }
