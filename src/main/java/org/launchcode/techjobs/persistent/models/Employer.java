@@ -11,9 +11,13 @@ import java.util.List;
 @Entity
 public class Employer extends AbstractEntity {
 
-    @OneToMany
+    public  List<Job> getJobs() {
+        return jobs;
+    }
+
+    @OneToMany/*(mappedBy = "jobs")*/
     @JoinColumn(name = "employer_id")
-    private List<Job> jobs = new ArrayList<Job>();
+    private final List<Job> jobs = new ArrayList<Job>();
 
     @NotNull
     @Size(min = 1, max = 50)

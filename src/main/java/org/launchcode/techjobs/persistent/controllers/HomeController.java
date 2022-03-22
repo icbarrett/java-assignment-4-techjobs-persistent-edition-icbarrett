@@ -1,5 +1,6 @@
 package org.launchcode.techjobs.persistent.controllers;
 
+import org.launchcode.techjobs.persistent.models.Employer;
 import org.launchcode.techjobs.persistent.models.Job;
 import org.launchcode.techjobs.persistent.models.data.EmployerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by LaunchCode
@@ -45,9 +47,15 @@ public class HomeController {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Job");
             return "add";
-        }
+        } else {
+            Optional<Employer> employer = employerRepository.findById(employerId);
+            newJob.setEmployer(employer);
 
-//        model.addAttribute("employers",employerRepository.findById(employerId));
+            newJob.setEmployer(employerId);
+
+
+
+        }
 
         /*  In processAddJobForm, add code inside of this method to select
             the employer object that has been chosen to be affiliated with
